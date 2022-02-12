@@ -5,4 +5,4 @@
 #### Hosted here : https://democrypto-7f0f3.web.app
 
 ## Screenshots
-!["Main page"](https://github.com/?raw=true)
+!["Main page"](https://github.com/SivaPrakasam7/DemoCrypto/blob/master/src/assets/main.png?raw=true)
