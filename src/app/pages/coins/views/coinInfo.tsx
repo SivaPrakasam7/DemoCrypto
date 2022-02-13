@@ -41,7 +41,7 @@ export const CoinInfo = ({ coin }: { coin: Api.socket.ticker }) => {
           <React.Fragment>
             <Components.StackLabel
               label="24h Change"
-              value={`${(coin?.price - coin?.open_24h).toFixed(2)} ${(
+              value={`${(coin?.price - coin?.open_24h).toFixed(2)}, ${(
                 ((coin?.price - coin?.open_24h) / coin?.open_24h) *
                 100
               ).toFixed(2)}%`}
@@ -58,12 +58,12 @@ export const CoinInfo = ({ coin }: { coin: Api.socket.ticker }) => {
               value={parseFloat(`${coin?.low_24h}`).toFixed(2)}
             />
             <Components.StackLabel
-              label="24h Volumne"
+              label={`24h Volume(${coin?.product_id.split("-")[0]})`}
               value={parseFloat(`${coin?.volume_24h}`).toFixed(2)}
             />
             <Components.StackLabel
-              label="30d Volumne"
-              value={parseFloat(`${coin?.volume_30d}`).toFixed(2)}
+              label={`24h Volume(${coin?.product_id.split("-")[1]})`}
+              value={parseFloat(`${coin?.volume_24h * coin.price}`).toFixed(2)}
             />
           </React.Fragment>
         )}
@@ -75,7 +75,7 @@ export const CoinInfo = ({ coin }: { coin: Api.socket.ticker }) => {
         >
           <Components.StackLabel
             label="24h Change"
-            value={`${(coin?.price - coin?.open_24h).toFixed(2)} ${(
+            value={`${(coin?.price - coin?.open_24h).toFixed(2)}, ${(
               ((coin?.price - coin?.open_24h) / coin?.open_24h) *
               100
             ).toFixed(2)}%`}
@@ -99,12 +99,12 @@ export const CoinInfo = ({ coin }: { coin: Api.socket.ticker }) => {
           sx={{ display: { sm: "none" } }}
         >
           <Components.StackLabel
-            label="24h Volumne"
+            label={`24h Volume(${coin?.product_id.split("-")[0]})`}
             value={parseFloat(`${coin?.volume_24h}`).toFixed(2)}
           />
           <Components.StackLabel
-            label="30d Volumne"
-            value={parseFloat(`${coin?.volume_30d}`).toFixed(2)}
+            label={`24h Volume(${coin?.product_id.split("-")[1]})`}
+            value={parseFloat(`${coin?.volume_24h * coin.price}`).toFixed(2)}
           />
         </Mui.Stack>
       </Mui.CardContent>

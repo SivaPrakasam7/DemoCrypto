@@ -3,7 +3,7 @@ import * as Api from "src/api";
 import * as Pages from "src/app/pages";
 
 export const Main = () => {
-  const { coins } = Api.useCoinSocket(["ticker", "matches"]);
+  const { coins, match } = Api.useCoinSocket(["ticker", "matches"]);
 
   return (
     <Mui.Box
@@ -15,7 +15,7 @@ export const Main = () => {
         borderRadius: 2,
       }}
     >
-      {coins ? (
+      {coins && match ? (
         <Mui.Grid container spacing={2}>
           <Mui.Grid item xs={12} md={8.5} container spacing={2}>
             <Mui.Grid item xs={12}>
@@ -27,6 +27,15 @@ export const Main = () => {
           </Mui.Grid>
           <Mui.Grid item xs={12} sm={6} md={3.5}>
             <Pages.Coins.Views.Spot.Main price={coins.price} />
+          </Mui.Grid>
+          <Mui.Grid item xs={12} sm={6} md={3.5}>
+            <Pages.Coins.Views.RecentTrade
+              id={coins.product_id}
+              match={match}
+            />
+          </Mui.Grid>
+          <Mui.Grid item xs={12} md={8.5}>
+            <Pages.Coins.Views.MyTrades />
           </Mui.Grid>
         </Mui.Grid>
       ) : (

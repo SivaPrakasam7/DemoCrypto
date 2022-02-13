@@ -10,7 +10,7 @@ export const useCoinSocket = (channels: string[]) => {
   const [state, setState] = React.useState("uninitialized");
   const [coins, setCoins] = React.useState<socket.ticker>();
   const [products, setProducts] = React.useState<socket.products[]>();
-  const [match, setMatch] = React.useState<socket.match>();
+  const [match, setMatch] = React.useState<socket.match[]>([]);
 
   const getStatus = () => {
     ws.current?.send(
@@ -50,7 +50,8 @@ export const useCoinSocket = (channels: string[]) => {
       message?.type === "ticker" &&
         message?.product_id === coin &&
         setCoins(message);
-      message?.type === "match" && setMatch(message);
+      message?.type === "match" &&
+        setMatch((previous) => [message, ...previous.slice(0, 10)]);
       message?.type === "status" && setProducts(message?.products);
       console.info(message);
     };
@@ -119,3 +120,16 @@ export declare namespace socket {
 // type: "ticker";
 // volume_24h: "227195.59685379";
 // volume_30d: "6674195.16561498";
+
+// {
+//   "type": "match",
+//   "trade_id": 280523317,
+//   "maker_order_id": "affc5527-2c3d-435d-ad9e-b5efde16f35d",
+//   "taker_order_id": "9015e6ce-70ba-485e-9d3b-a9e7abd42ce4",
+//   "side": "sell",
+//   "size": "0.00009456",
+//   "price": "42205.93",
+//   "product_id": "BTC-USD",
+//   "sequence": 34066313558,
+//   "time": "2022-02-13T03:32:36.596221Z"
+// }
