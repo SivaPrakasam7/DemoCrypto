@@ -1,4 +1,5 @@
 import * as Mui from "@mui/material";
+import * as MuiIcons from "@mui/icons-material";
 import * as React from "react";
 import * as Router from "react-router-dom";
 import * as Api from "src/api";
@@ -7,9 +8,12 @@ import * as Constants from "src/constants";
 export const Coins = () => {
   const { products } = Api.useCoinSocket(["status"]);
   const [pair, setPair] = React.useState("USD");
+  const [filter, setFilter] = React.useState("");
   const handleUSD = () => setPair("USD");
   const handleUSDC = () => setPair("USDC");
   const handleUSDT = () => setPair("USDT");
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setFilter(e.target.value);
 
   return (
     <Mui.Grid container spacing={2} sx={{ pb: 10 }}>
@@ -18,21 +22,36 @@ export const Coins = () => {
           spacing={2}
           direction={{ xs: "column", sm: "row" }}
           alignItems="center"
-          justifyContent="space-between"
+          justifyContent={{ xs: "space-between", sm: "flex-start" }}
         >
           <Mui.Typography variant="h5" color="primary">
-            Coins List
+            Coin List
           </Mui.Typography>
+          <Mui.Box flexGrow={1} sx={{ display: { xs: "none", sm: "flex" } }} />
           <Mui.ButtonGroup>
             <Mui.Button onClick={handleUSD}>USD</Mui.Button>
             <Mui.Button onClick={handleUSDC}>USDC</Mui.Button>
             <Mui.Button onClick={handleUSDT}>USDT</Mui.Button>
           </Mui.ButtonGroup>
+          <Mui.TextField
+            size="small"
+            onChange={handleChange}
+            InputProps={{
+              startAdornment: (
+                <Mui.InputAdornment position="start">
+                  <MuiIcons.Search color="primary" />
+                </Mui.InputAdornment>
+              ),
+            }}
+          />
         </Mui.Stack>
       </Mui.Grid>
       {products ? (
         products
-          .filter((coin) => coin?.id?.split("-")?.[1] === pair)
+          .filter((coin) => coin.id.split("-").at(1) === pair)
+          .filter((coin) =>
+            coin.display_name.toLowerCase().includes(filter.toLowerCase())
+          )
           .sort((a, b) => a.id.localeCompare(b.id))
           // .slice(0, 40)
           .map((coin, index) => (

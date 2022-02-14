@@ -34,5 +34,12 @@ export const Components = (): Pick<Mui.ThemeOptions, "components"> => ({
         },
       },
     },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          borderRadius: 10,
+        },
+      },
+    },
   },
 });

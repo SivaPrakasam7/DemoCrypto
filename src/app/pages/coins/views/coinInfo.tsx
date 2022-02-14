@@ -3,9 +3,11 @@ import * as React from "react";
 import * as Components from "src/app/components";
 import * as Constants from "src/constants";
 import * as Api from "src/api";
+import * as Hooks from "src/app/hooks";
 
 export const CoinInfo = ({ coin }: { coin: Api.socket.ticker }) => {
   const isMobile = Mui.useMediaQuery(Mui.useTheme().breakpoints.down("sm"));
+  const format = Hooks.FormatN;
   return (
     <Mui.Card>
       <Mui.CardContent
@@ -30,7 +32,7 @@ export const CoinInfo = ({ coin }: { coin: Api.socket.ticker }) => {
           </Mui.Avatar>
           <Mui.Stack>
             <Mui.Typography variant="body1" color="primary">
-              {parseFloat(`${coin?.price}`).toFixed(2)}
+              {format(`${coin?.price}`)}
             </Mui.Typography>
             <Mui.Typography variant="caption" color="text.secondary">
               {coin?.product_id}
@@ -41,29 +43,33 @@ export const CoinInfo = ({ coin }: { coin: Api.socket.ticker }) => {
           <React.Fragment>
             <Components.StackLabel
               label="24h Change"
-              value={`${(coin?.price - coin?.open_24h).toFixed(2)}, ${(
-                ((coin?.price - coin?.open_24h) / coin?.open_24h) *
-                100
-              ).toFixed(2)}%`}
+              value={`${format(
+                (coin?.price - coin?.open_24h).toString()
+              )}, ${format(
+                (
+                  ((coin?.price - coin?.open_24h) / coin?.open_24h) *
+                  100
+                ).toString()
+              )}%`}
               valueColor={
                 coin?.price - coin?.open_24h > 0 ? "success.main" : "error.main"
               }
             />
             <Components.StackLabel
               label="24h High"
-              value={parseFloat(`${coin?.high_24h}`).toFixed(2)}
+              value={format(`${coin?.high_24h}`)}
             />
             <Components.StackLabel
               label="24h Low"
-              value={parseFloat(`${coin?.low_24h}`).toFixed(2)}
+              value={format(`${coin?.low_24h}`)}
             />
             <Components.StackLabel
               label={`24h Volume(${coin?.product_id.split("-")[0]})`}
-              value={parseFloat(`${coin?.volume_24h}`).toFixed(2)}
+              value={format(`${coin?.volume_24h}`)}
             />
             <Components.StackLabel
               label={`24h Volume(${coin?.product_id.split("-")[1]})`}
-              value={parseFloat(`${coin?.volume_24h * coin.price}`).toFixed(2)}
+              value={format(`${coin?.volume_24h * coin.price}`)}
             />
           </React.Fragment>
         )}
@@ -75,21 +81,25 @@ export const CoinInfo = ({ coin }: { coin: Api.socket.ticker }) => {
         >
           <Components.StackLabel
             label="24h Change"
-            value={`${(coin?.price - coin?.open_24h).toFixed(2)}, ${(
-              ((coin?.price - coin?.open_24h) / coin?.open_24h) *
-              100
-            ).toFixed(2)}%`}
+            value={`${format(
+              (coin?.price - coin?.open_24h).toString()
+            )}, ${format(
+              (
+                ((coin?.price - coin?.open_24h) / coin?.open_24h) *
+                100
+              ).toString()
+            )}%`}
             valueColor={
               coin?.price - coin?.open_24h > 0 ? "success.main" : "error.main"
             }
           />
           <Components.StackLabel
             label="24h High"
-            value={parseFloat(`${coin?.high_24h}`).toFixed(2)}
+            value={format(`${coin?.high_24h}`)}
           />
           <Components.StackLabel
             label="24h Low"
-            value={parseFloat(`${coin?.low_24h}`).toFixed(2)}
+            value={format(`${coin?.low_24h}`)}
           />
         </Mui.Stack>
         <Mui.Stack
@@ -100,11 +110,11 @@ export const CoinInfo = ({ coin }: { coin: Api.socket.ticker }) => {
         >
           <Components.StackLabel
             label={`24h Volume(${coin?.product_id.split("-")[0]})`}
-            value={parseFloat(`${coin?.volume_24h}`).toFixed(2)}
+            value={format(`${coin?.volume_24h}`)}
           />
           <Components.StackLabel
             label={`24h Volume(${coin?.product_id.split("-")[1]})`}
-            value={parseFloat(`${coin?.volume_24h * coin.price}`).toFixed(2)}
+            value={format(`${coin?.volume_24h * coin.price}`)}
           />
         </Mui.Stack>
       </Mui.CardContent>
