@@ -35,7 +35,7 @@ export const Coins = () => {
           justifyContent="space-between"
         >
           <Mui.Typography variant="h5" color="primary">
-            Coin List
+            {`${products?.length} Coin pairs`}
           </Mui.Typography>
           <Mui.Box flexGrow={1} sx={{ display: { xs: "none", sm: "flex" } }} />
           <Mui.TextField
@@ -52,40 +52,38 @@ export const Coins = () => {
         </Mui.Stack>
       </Mui.Grid>
       {coins ? (
-        coins
-          .slice(0, slice)
-          .map((coin, index) => (
-            <Mui.Grid key={index} item xs={12} sm={6} md={3}>
-              <Mui.Card>
-                <Mui.CardActionArea
-                  component={Router.Link}
-                  to={`coins/${coin.id}`}
+        coins.slice(0, slice).map((coin, index) => (
+          <Mui.Grid key={index} item xs={12} sm={6} md={3}>
+            <Mui.Card>
+              <Mui.CardActionArea
+                component={Router.Link}
+                to={`coins/${coin.id}`}
+              >
+                <Mui.Stack
+                  component={Mui.CardContent}
+                  direction="row"
+                  spacing={2}
+                  alignItems="center"
                 >
-                  <Mui.Stack
-                    component={Mui.CardContent}
-                    direction="row"
-                    spacing={2}
-                    alignItems="center"
+                  <Mui.Avatar
+                    src={`${Constants.CoinUrl.Logo}/${coin.base_currency}.png`}
                   >
-                    <Mui.Avatar
-                      src={`${Constants.CoinUrl.Logo}/${coin.base_currency}.png`}
-                    >
-                      {coin.base_currency[0]}
-                    </Mui.Avatar>
-                    <Mui.Stack>
-                      <Mui.Typography variant="body1">
-                        {coin.display_name}
-                      </Mui.Typography>
-                      <Mui.Typography variant="body2" color="text.secondary">
-                        {coin.min_market_funds}-{coin.max_market_funds}{" "}
-                        {coin.base_currency}
-                      </Mui.Typography>
-                    </Mui.Stack>
+                    {coin.base_currency[0]}
+                  </Mui.Avatar>
+                  <Mui.Stack>
+                    <Mui.Typography variant="body1">
+                      {coin.display_name}
+                    </Mui.Typography>
+                    <Mui.Typography variant="body2" color="text.secondary">
+                      {coin.min_market_funds}-{coin.max_market_funds}{" "}
+                      {coin.base_currency}
+                    </Mui.Typography>
                   </Mui.Stack>
-                </Mui.CardActionArea>
-              </Mui.Card>
-            </Mui.Grid>
-          ))
+                </Mui.Stack>
+              </Mui.CardActionArea>
+            </Mui.Card>
+          </Mui.Grid>
+        ))
       ) : (
         <Mui.Stack
           alignItems="center"
