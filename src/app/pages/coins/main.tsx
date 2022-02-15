@@ -26,7 +26,10 @@ export const Main = () => {
             </Mui.Grid>
           </Mui.Grid>
           <Mui.Grid item xs={12} sm={6} md={3.5}>
-            <Pages.Coins.Views.Spot.Main price={coins.price} />
+            <Pages.Coins.Views.Spot.Main
+              product_id={coins.product_id}
+              price={coins.price}
+            />
           </Mui.Grid>
           <Mui.Grid item xs={12} sm={6} md={3.5}>
             <Pages.Coins.Views.RecentTrade

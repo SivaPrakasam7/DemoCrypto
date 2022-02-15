@@ -23,7 +23,7 @@ export const Main = () => {
         <Components.Logo />
         <Mui.CardMedia
           component="img"
-          src={Assets.AuthBackground}
+          src={Assets.CryptoCurrency}
           sx={{ width: "100%", height: "100%" }}
         />
       </Mui.Grid>

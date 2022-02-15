@@ -25,3 +25,21 @@ interface ImportMetaEnv extends Readonly<Record<string, string>> {
 interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
+
+interface trade {
+  amount: number;
+  coin: string;
+  commission: number;
+  marketPrice?: number;
+  limitPrice?: number;
+  stopLimitPrice?: number;
+  noOfCoins: number;
+  orderCancelled: boolean;
+  orderType: 0 | 1 | 2 | 3 | 4 | 5;
+  executedAt: number | null;
+  pair: string;
+  placedAt: number;
+  side: "buy" | "sell";
+  status: "pending" | "completed" | "cancelled";
+  uid: string;
+}

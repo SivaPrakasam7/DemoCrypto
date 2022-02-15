@@ -1,7 +1,6 @@
 import * as Router from "react-router-dom";
 import * as Pages from "src/app/pages";
 import * as Layouts from "src/app/layouts";
-import * as Routes from "src/app/routes";
 
 export const Main = () =>
   Router.useRoutes([
@@ -25,11 +24,7 @@ export const Main = () =>
     },
     {
       path: "account/*",
-      element: (
-        <Routes.Route>
-          <Layouts.Auth.Main />
-        </Routes.Route>
-      ),
+      element: <Layouts.Auth.Main />,
       children: [
         {
           path: "login/*",

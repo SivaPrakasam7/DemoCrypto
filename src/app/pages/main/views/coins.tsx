@@ -35,7 +35,7 @@ export const Coins = () => {
           justifyContent="space-between"
         >
           <Mui.Typography variant="h5" color="primary">
-            {`${products?.length} Coin pairs`}
+            {`${coins?.length} Coin pairs`}
           </Mui.Typography>
           <Mui.Box flexGrow={1} sx={{ display: { xs: "none", sm: "flex" } }} />
           <Mui.TextField
@@ -51,7 +51,7 @@ export const Coins = () => {
           />
         </Mui.Stack>
       </Mui.Grid>
-      {coins ? (
+      {products ? (
         coins.slice(0, slice).map((coin, index) => (
           <Mui.Grid key={index} item xs={12} sm={6} md={3}>
             <Mui.Card>
@@ -100,7 +100,6 @@ export const Coins = () => {
         justifyContent="center"
         alignItems="center"
       >
-        {console.log(coins.length, slice)}
         <Mui.Button
           disabled={coins.length <= slice}
           endIcon={<MuiIcons.ArrowRight />}

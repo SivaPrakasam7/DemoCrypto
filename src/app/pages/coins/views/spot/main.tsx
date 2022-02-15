@@ -2,7 +2,13 @@ import * as Mui from "@mui/material";
 import * as React from "react";
 import * as Pages from "src/app/pages";
 
-export const Main = ({ price }: { price: number }) => {
+export const Main = ({
+  product_id,
+  price,
+}: {
+  product_id: string;
+  price: number;
+}) => {
   const [trade, setTrade] = React.useState<"market" | "limit" | "stoplimit">(
     "market"
   );
@@ -76,10 +82,23 @@ export const Main = ({ price }: { price: number }) => {
         </Mui.Stack>
         {
           {
-            market: <Pages.Coins.Views.Spot.Orders.MarketOrder marketValue={price} />,
-            limit: <Pages.Coins.Views.Spot.Orders.LimitOrder marketValue={price} />,
+            market: (
+              <Pages.Coins.Views.Spot.Orders.MarketOrder
+                product_id={product_id}
+                marketPrice={price}
+              />
+            ),
+            limit: (
+              <Pages.Coins.Views.Spot.Orders.LimitOrder
+                product_id={product_id}
+                marketPrice={price}
+              />
+            ),
             stoplimit: (
-              <Pages.Coins.Views.Spot.Orders.StopLimit marketValue={price} />
+              <Pages.Coins.Views.Spot.Orders.StopLimit
+                product_id={product_id}
+                marketPrice={price}
+              />
             ),
           }[trade]
         }

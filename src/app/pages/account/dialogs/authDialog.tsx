@@ -22,9 +22,9 @@ export const AuthDialog = ({ icon, title, message }: authDialog.Props) => (
         {message}
       </Mui.Typography>
     </Mui.Stack>
-    <Mui.DialogActions>
+    {/* <Mui.DialogActions>
       <Mui.Button variant="outlined">next</Mui.Button>
-    </Mui.DialogActions>
+    </Mui.DialogActions> */}
   </Components.Dialog>
 );
 
