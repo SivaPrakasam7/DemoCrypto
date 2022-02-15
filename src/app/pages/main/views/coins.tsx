@@ -7,13 +7,23 @@ import * as Constants from "src/constants";
 
 export const Coins = () => {
   const { products } = Api.useCoinSocket(["status"]);
-  const [pair, setPair] = React.useState("USD");
   const [filter, setFilter] = React.useState("");
-  const handleUSD = () => setPair("USD");
-  const handleUSDC = () => setPair("USDC");
-  const handleUSDT = () => setPair("USDT");
+  const [slice, setSlice] = React.useState(20);
+  const handleMore = () => setSlice((prev) => prev + 20);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setFilter(e.target.value);
+
+  React.useEffect(() => {
+    setSlice(20);
+  }, [filter]);
+
+  const coins = products
+    ? products
+        ?.sort((a, b) => a.id.localeCompare(b.id))
+        ?.filter((coin) =>
+          coin.display_name.toLowerCase().includes(filter.toLowerCase())
+        )
+    : [];
 
   return (
     <Mui.Grid container spacing={2} sx={{ pb: 10 }}>
@@ -22,17 +32,12 @@ export const Coins = () => {
           spacing={2}
           direction={{ xs: "column", sm: "row" }}
           alignItems="center"
-          justifyContent={{ xs: "space-between", sm: "flex-start" }}
+          justifyContent="space-between"
         >
           <Mui.Typography variant="h5" color="primary">
             Coin List
           </Mui.Typography>
           <Mui.Box flexGrow={1} sx={{ display: { xs: "none", sm: "flex" } }} />
-          <Mui.ButtonGroup>
-            <Mui.Button onClick={handleUSD}>USD</Mui.Button>
-            <Mui.Button onClick={handleUSDC}>USDC</Mui.Button>
-            <Mui.Button onClick={handleUSDT}>USDT</Mui.Button>
-          </Mui.ButtonGroup>
           <Mui.TextField
             size="small"
             onChange={handleChange}
@@ -46,14 +51,9 @@ export const Coins = () => {
           />
         </Mui.Stack>
       </Mui.Grid>
-      {products ? (
-        products
-          .filter((coin) => coin.id.split("-").at(1) === pair)
-          .filter((coin) =>
-            coin.display_name.toLowerCase().includes(filter.toLowerCase())
-          )
-          .sort((a, b) => a.id.localeCompare(b.id))
-          // .slice(0, 40)
+      {coins ? (
+        coins
+          .slice(0, slice)
           .map((coin, index) => (
             <Mui.Grid key={index} item xs={12} sm={6} md={3}>
               <Mui.Card>
@@ -95,6 +95,22 @@ export const Coins = () => {
           <Mui.CircularProgress />
         </Mui.Stack>
       )}
+      <Mui.Grid
+        item
+        xs={12}
+        component={Mui.Stack}
+        justifyContent="center"
+        alignItems="center"
+      >
+        {console.log(coins.length, slice)}
+        <Mui.Button
+          disabled={coins.length <= slice}
+          endIcon={<MuiIcons.ArrowRight />}
+          onClick={handleMore}
+        >
+          Load more
+        </Mui.Button>
+      </Mui.Grid>
     </Mui.Grid>
   );
 };

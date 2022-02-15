@@ -10,6 +10,6 @@ const Client = Axios.default.create({
 export const useCandles = () => {
   const { coin } = Router.useParams();
   return ReactQuery.useQuery<number[][]>(["coins"], () =>
-    Client(`products/${coin}/candles?granularity=86400`).then((res) => res.data)
+    Client(`products/${coin}/candles`).then((res) => res.data)
   );
 };
