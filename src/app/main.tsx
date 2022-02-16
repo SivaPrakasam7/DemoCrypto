@@ -5,7 +5,7 @@ import * as Providers from "src/app/providers";
 
 export const Main = () => (
   <Themes.Main>
-    <Providers.ErrorBoundary>
+    {/* <Providers.ErrorBoundary> */}
       <Providers.FirebaseProvider>
         <Providers.ReactQueryProvider>
           <Router.BrowserRouter>
@@ -13,6 +13,6 @@ export const Main = () => (
           </Router.BrowserRouter>
         </Providers.ReactQueryProvider>
       </Providers.FirebaseProvider>
-    </Providers.ErrorBoundary>
+    {/* </Providers.ErrorBoundary> */}
   </Themes.Main>
 );

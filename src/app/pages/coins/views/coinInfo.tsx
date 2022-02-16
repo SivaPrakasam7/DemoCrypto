@@ -6,7 +6,7 @@ import * as Api from "src/api";
 import * as Hooks from "src/app/hooks";
 
 export const CoinInfo = ({ coin }: { coin: Api.socket.ticker }) => {
-  const isMobile = Mui.useMediaQuery(Mui.useTheme().breakpoints.down("sm"));
+  const isMobile = Mui.useMediaQuery(Mui.useTheme().breakpoints.up("sm"));
   const format = Hooks.FormatN;
   return (
     <Mui.Card>
@@ -39,7 +39,7 @@ export const CoinInfo = ({ coin }: { coin: Api.socket.ticker }) => {
             </Mui.Typography>
           </Mui.Stack>
         </Mui.Stack>
-        {!isMobile && (
+        {isMobile && (
           <React.Fragment>
             <Components.StackLabel
               label="24h Change"

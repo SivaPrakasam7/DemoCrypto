@@ -99,13 +99,13 @@ export const useOrder = (
     setTotal(+(amount + amount * commission).toFixed(2));
     if (coins * coinValue * commission > availableBalance) handleCoinAmount();
     if (limitPrice > marketValue && order === "buy")
-      setLimitPrice(+marketValue.toFixed(2));
+      setLimitPrice(+marketValue.toFixed(8));
     if (stopLimitPrice <= marketValue && order === "buy")
-      setStopLimitPrice(+marketValue.toFixed(2));
+      setStopLimitPrice(+marketValue.toFixed(8));
     if (stopLimitPrice > marketValue && order === "sell")
-      setStopLimitPrice(+marketValue.toFixed(2));
+      setStopLimitPrice(+marketValue.toFixed(8));
     if (limitPrice <= marketValue && order === "sell")
-      setLimitPrice(+marketValue.toFixed(2));
+      setLimitPrice(+marketValue.toFixed(8));
   });
 
   return {

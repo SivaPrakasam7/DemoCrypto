@@ -53,15 +53,11 @@ export const useCoinSocket = (channels: string[]) => {
       message?.type === "match" &&
         setMatch((previous) => [message, ...previous.slice(0, 10)]);
       message?.type === "status" && setProducts(message?.products);
-      console.info(message);
+      // console.info(message);
     };
   });
 
   return { state, coins, products, match };
-};
-
-const createCandle = (match: socket.match) => {
-  const candles = {};
 };
 
 export declare namespace socket {
